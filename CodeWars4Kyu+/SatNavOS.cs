@@ -21,10 +21,10 @@ namespace CodeWars4Kyu_
             var compassDirection = (Compass)Enum.Parse(typeof(Compass), directions[0].Split(' ').Last());
             NavPoint currentNavPoint = new NavPoint() { x = 0f, y = 0f };
             bool turnedAround = false;
-
+            bool checkP = false;
             foreach (var direction in directions)
             {
-                if (direction.StartsWith("Ta"))
+                if (direction.StartsWith("Ta")) //Take turn
                 {
                     if (turnedAround)
                     {
@@ -49,8 +49,9 @@ namespace CodeWars4Kyu_
                     compassDirection = SetCompass(instructions[1], compassDirection);
 
                 }
-                else if (direction.StartsWith('G'))
+                else if (direction.StartsWith('G')) //Go Straight
                 {
+                    var checkpoint = currentNavPoint;
                     var travel = direction.Split(' ').Last();
                     if (travel.Contains("km"))
                     {
@@ -62,9 +63,17 @@ namespace CodeWars4Kyu_
                         var movement = double.Parse(travel.TrimEnd('m')) / 1000;
                         currentNavPoint = Move(movement, currentNavPoint, compassDirection);
                     }
-                    turnedAround = false;
+                    if (turnedAround)
+                    {
+                        if ((int)currentNavPoint.x == (int)checkpoint.x || (int)currentNavPoint.y == (int)checkpoint.y)
+                        {
+                            checkP = true;
+                        }
+                        turnedAround = false;
+                    }
+                    
                 }
-                else if (direction.StartsWith("Tu"))
+                else if (direction.StartsWith("Tu")) //Turn Around
                 {
                     compassDirection = TurnAround(compassDirection);
                     turnedAround = true;
