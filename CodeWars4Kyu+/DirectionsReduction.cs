@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeWars4Kyu_
 {
-    public class DirectionsReduction
+    public static class DirectionsReduction
     {
         public static string[] dirReduc(String[] arr)
         {
@@ -52,17 +52,5 @@ namespace CodeWars4Kyu_
             }
             return dir.ToArray();
         }
-        //Dictionary<string, int> simplified = new Dictionary<string, int>()
-        //{
-        //    ["NORTH"] = 0,
-        //    ["SOUTH"] = 0,
-        //    ["EAST"] = 0,
-        //    ["WEST"] = 0
-        //};
-        //    for (int i = 0; i<arr.Length; i++)
-        //    {
-        //        simplified[arr[i]]++;
-        //    }
-
     }
 }
